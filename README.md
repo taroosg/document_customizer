@@ -15,6 +15,29 @@
 4. 文書を作成すると，フォーマット毎に文章画面へのリンクが表示される．
 5. リンクをクリックすると各文書の詳細が確認できる．
 
-## DB 設定
+## 必要な設定
 
-DB 名 `smabldg` で DB 作成して `smabldg.sql` をインポートするとテーブルとデータが作成される．
+- DB 名 `smabldg` で DB 作成して `smabldg.sql` をインポートするとテーブルとデータが作成される．
+- ルートディレクトリに `env.php` を作成し，下記の内容を記述する．
+
+```php
+<?php
+function dbn()
+{
+  // DB名，ポート，ホストなどを指定
+  return "mysql:dbname=smabldg;charset=utf8mb4;port=3306;host=localhost";
+};
+
+function user()
+{
+  // DBのユーザ名を指定
+  return "root";
+};
+
+function pwd()
+{
+  // DBのパスワードを指定
+  return "";
+};
+
+```
