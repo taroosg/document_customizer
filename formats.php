@@ -7,7 +7,7 @@ include('utilities.php');
 $pdo = connect_to_db();
 
 // 会社で作成した文書を一覧で表示
-$sql = 'SELECT * FROM formats WHERE team_id = :team_id';
+$sql = 'SELECT * FROM formats WHERE team_id = :team_id  ORDER BY created_at DESC';
 
 $stmt = $pdo->prepare($sql);
 $stmt->bindValue(':team_id', $team_id, PDO::PARAM_STR);

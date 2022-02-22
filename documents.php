@@ -27,7 +27,7 @@ if ($status === false) {
 }
 
 // 会社で作成した文書を一覧で表示
-$sql = 'SELECT * FROM documents WHERE format_id = :format_id';
+$sql = 'SELECT * FROM documents WHERE format_id = :format_id ORDER BY date DESC';
 
 $stmt = $pdo->prepare($sql);
 $stmt->bindValue(':format_id', $format_id, PDO::PARAM_STR);
