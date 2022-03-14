@@ -31,7 +31,8 @@ if ($status === false) {
 
 // data作成
 $data = array_filter($_POST, fn ($k) => $k !== 'document_date' && $k !== 'format_id' && $k !== 'team_id', ARRAY_FILTER_USE_KEY);
-$items_columns = array_map(fn ($k, $v) => "(NULL, '{$document_id}', '{$k}', '{$v}', now(), now())", array_keys($data), array_values($data));
+$optimized_data = array_map(fn ($v) => is_array($v) ? json_encode($v, JSON_UNESCAPED_UNICODE) : $v, $data);
+$items_columns = array_map(fn ($k, $v) => "(NULL, '{$document_id}', '{$k}', '{$v}', now(), now())", array_keys($data), array_values($optimized_data));
 $sql = 'INSERT INTO data VALUES ';
 $sql .= implode(', ', $items_columns);
 

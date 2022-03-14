@@ -28,19 +28,24 @@ $get_item_parts = function ($item_id) use ($pdo) {
 // タグ生成関数
 $create_input = fn ($x) => "<label for='{$x['id']}'><p>{$x['item_name']}</p><input type='{$x['type']}' id='{$x['id']}' name='{$x['id']}'></label>";
 $create_textarea = fn ($x) => "<label for='{$x['id']}'><p>{$x['item_name']}</p><textarea id='{$x['id']}' name='{$x['id']}'></textarea></label>";
-$create_radio = function ($x) use ($get_item_parts) {
-  $radios = implode('', array_map(fn ($x) => "<li><label for='{$x['id']}'>{$x['item_value']}<input type='radio' name='{$x['item_id']}' value='{$x['item_value']}'></label></li>", $get_item_parts($x['id'])));
-  return "<ul><p>{$x['item_name']}</p>{$radios}</ul>";
-};
 $create_select = function ($x) use ($get_item_parts) {
   $options = implode('', array_map(fn ($x) => "<option value='{$x['item_value']}'>{$x['item_value']}</option>", $get_item_parts($x['id'])));
   return "<label for='{$x['id']}'><p>{$x['item_name']}</p><select id='{$x['id']}' name='{$x['id']}'>{$options}</select></label>";
 };
+$create_radio = function ($x) use ($get_item_parts) {
+  $radios = implode('', array_map(fn ($x) => "<li><label for='{$x['id']}'>{$x['item_value']}<input type='radio' name='{$x['item_id']}' value='{$x['item_value']}'></label></li>", $get_item_parts($x['id'])));
+  return "<ul><p>{$x['item_name']}</p>{$radios}</ul>";
+};
+$create_checkbox = function ($x) use ($get_item_parts) {
+  $checkboxes = implode('', array_map(fn ($x) => "<li><label for='{$x['id']}'>{$x['item_value']}<input type='checkbox' name='{$x['item_id']}[]' value='{$x['item_value']}'></label></li>", $get_item_parts($x['id'])));
+  return "<ul><p>{$x['item_name']}</p>{$checkboxes}</ul>";
+};
 
 $create_inputs = [
   "textarea" => $create_textarea,
-  "radio" => $create_radio,
   "select" => $create_select,
+  "radio" => $create_radio,
+  "checkbox" => $create_checkbox,
   "text" => $create_input,
   "date" => $create_input,
   "number" => $create_input,
