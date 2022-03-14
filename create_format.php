@@ -1,4 +1,12 @@
 <?php
+echo "<pre>";
+var_dump($_POST);
+echo "</pre>";
+exit();
+
+// items: item_name, format_id, type
+
+// item_parts: format_id, item_id, item_value
 
 $format_name = $_POST['format_name'];
 $items = explode("\r\n", $_POST['items']);
